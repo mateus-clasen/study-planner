@@ -1,0 +1,12 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   154    0    77  100    77   1089   1089 --:--:-- --:--:-- --:--:--  2200
+{"message":"User created and logged in","userId":"cmlssur6r00083pxmmm44o90i"}
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    93    0    43  100    50   3332   3874 --:--:-- --:--:-- --:--:--  7750
+{"message":"Perfil atualizado com sucesso"}
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    47    0    47    0     0   6514      0 --:--:-- --:--:-- --:--:--  6714
+{"name":"New Name","email":"newemail@test.com"}

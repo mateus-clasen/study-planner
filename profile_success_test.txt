@@ -1,0 +1,29 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   157    0    77  100    80    778    809 --:--:-- --:--:-- --:--:--  1602
+{"message":"User created and logged in","userId":"cmlsss85c00073pxmga78kitm"}
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> GET /api/auth/profile HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.5.0
+> Accept: */*
+> Cookie: token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbWxzc3M4NWMwMDA3M3B4bWdhNzhraXRtIiwiZW1haWwiOiJwcm9maWxlQHRlc3QuY29tIiwiZXhwIjoxNzcxNTUxODM4fQ.f1_E6gFTeVC5urSLGVbBpbAAICbJL_nVw9Xs58gQn2s
+> 
+< HTTP/1.1 200 OK
+< vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+< content-type: application/json
+< Date: Thu, 19 Feb 2026 01:43:58 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+{ [50 bytes data]
+100    50    0    50    0     0   6037      0 --:--:-- --:--:-- --:--:--  6250
+* Connection #0 to host localhost left intact
+{"name":"Profile Test","email":"profile@test.com"}

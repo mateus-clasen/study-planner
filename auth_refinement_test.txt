@@ -1,0 +1,6 @@
+--- Logout Test ---
+< HTTP/1.1 307 Temporary Redirect
+
+--- Register Auto-Login Test ---
+< HTTP/1.1 201 Created
+{"message":"User created and logged in","userId":"cmlss9maf00043pxmt4zr1pn9"}

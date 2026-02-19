@@ -1,0 +1,20 @@
+--- Register ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   140    0    63  100    77    796    973 --:--:-- --:--:-- --:--:--  1772
+{"message":"User created","userId":"cmlsrzqhp00003pxmvmacq027"}
+--- Login ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    86    0    30  100    56    414    773 --:--:-- --:--:-- --:--:--  1194
+{"message":"Login successful"}
+--- Generate ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    62    0     0  100    62      0    558 --:--:-- --:--:-- --:--:--   558100   380    0   318  100    62   2856    557 --:--:-- --:--:-- --:--:--  3392
+{"id":"cmlsrzqn700023pxmg6m2ve74","userId":"cmlsrzqhp00003pxmvmacq027","subject":"Math","goal":"Pass Exam","deadline":"1 week","content":"{\"message\":\"Mock Plan generated (Configure N8N_WEBHOOK_URL)\",\"subject\":\"Math\",\"schedule\":[\"Day 1: Basics\",\"Day 2: Practice\"]}","createdAt":"2026-02-19T01:21:49.220Z"}
+--- List ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   320    0   320    0     0   3336      0 --:--:-- --:--:-- --:--:--  3368
+[{"id":"cmlsrzqn700023pxmg6m2ve74","userId":"cmlsrzqhp00003pxmvmacq027","subject":"Math","goal":"Pass Exam","deadline":"1 week","content":"{\"message\":\"Mock Plan generated (Configure N8N_WEBHOOK_URL)\",\"subject\":\"Math\",\"schedule\":[\"Day 1: Basics\",\"Day 2: Practice\"]}","createdAt":"2026-02-19T01:21:49.220Z"}]

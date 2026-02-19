@@ -1,0 +1,57 @@
+--- Logout Test ---
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> GET /api/auth/logout HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 307 Temporary Redirect
+< vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+< location: http://localhost:3000/
+* Added cookie token="" for domain localhost, path /, expire 1
+< set-cookie: token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT
+< Date: Thu, 19 Feb 2026 01:29:54 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+* Connection #0 to host localhost left intact
+
+--- Register Auto-Login Test ---
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/register HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.5.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 87
+> 
+} [87 bytes data]
+< HTTP/1.1 201 Created
+< vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+< content-type: application/json
+* Added cookie token="eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbWxzc2E0d3MwMDA1M3B4bW45bTJtaG91IiwiZW1haWwiOiJhdXRvbG9naW4yQHRlc3QuY29tIiwiZXhwIjoxNzcxNTUwOTk0fQ.aCxDZkSfKEv4Dsw-b0uNTHduQyvoOU8aN7kCaV_aymU" for domain localhost, path /, expire 1771550994
+< set-cookie: token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbWxzc2E0d3MwMDA1M3B4bW45bTJtaG91IiwiZW1haWwiOiJhdXRvbG9naW4yQHRlc3QuY29tIiwiZXhwIjoxNzcxNTUwOTk0fQ.aCxDZkSfKEv4Dsw-b0uNTHduQyvoOU8aN7kCaV_aymU; Path=/; Expires=Fri, 20 Feb 2026 01:29:54 GMT; Max-Age=86400; HttpOnly
+< Date: Thu, 19 Feb 2026 01:29:54 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+{ [77 bytes data]
+100   164    0    77  100    87    971   1097 --:--:-- --:--:-- --:--:--  2075
+* Connection #0 to host localhost left intact
+{"message":"User created and logged in","userId":"cmlssa4ws00053pxmn9m2mhou"}

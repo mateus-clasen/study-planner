@@ -1,0 +1,29 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/study-plans/generate HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.5.0
+> Accept: */*
+> Cookie: token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbWxzc3VyNnIwMDA4M3B4bW1tNDRvOTBpIiwiZW1haWwiOiJvbGRlbWFpbEB0ZXN0LmNvbSIsImV4cCI6MTc3MTU1MTk1Nn0.GrRko0AcInRju4GwBapzP__eKgj6t7wdOSSkrD1M8QA
+> Content-Type: application/json
+> Content-Length: 73
+> 
+} [73 bytes data]
+< HTTP/1.1 503 Service Unavailable
+< vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+< content-type: application/json
+< Date: Thu, 19 Feb 2026 01:57:21 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+{ [75 bytes data]
+100   148    0    75  100    73   2023   1969 --:--:-- --:--:-- --:--:--  4000
+* Connection #0 to host localhost left intact
+{"error":"Serviço de IA indisponível (URL do Webhook não configurada)."}

@@ -1,0 +1,111 @@
+/* ── Auth pages CSS ── */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ede9fe 0%, #e0f2fe 50%, #f0fdf4 100%);
+    padding: 1rem;
+    animation: fadeIn 0.4s ease;
+}
+
+.brandArea {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brandName {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.brandTagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: 0 4px 24px rgba(79, 70, 229, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+    animation: fadeInUp 0.4s ease;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 0.35rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 1.75rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.link a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    background: var(--danger-light);
+    color: var(--danger);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+    border: 1px solid rgba(220, 38, 38, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}

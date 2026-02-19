@@ -1,0 +1,139 @@
+{
+    "name": "Planejador de Estudos - SaaS",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "gerar-plano",
+                "responseMode": "responseNode",
+                "options": {}
+            },
+            "id": "a1b2c3d4-0001-0001-0001-000000000001",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                240,
+                300
+            ],
+            "webhookId": "gerar-plano-saas"
+        },
+        {
+            "parameters": {
+                "resource": "chat",
+                "operation": "message",
+                "modelId": {
+                    "__rl": true,
+                    "value": "gpt-4o-mini",
+                    "mode": "list",
+                    "cachedResultName": "GPT-4O-MINI"
+                },
+                "messages": {
+                    "values": [
+                        {
+                            "role": "system",
+                            "content": "Você é um especialista em pedagogia e organização de estudos. Sua tarefa é criar um cronograma detalhado de estudos.\n\nRegra de Saída OBRIGATÓRIA: Responda ESTRITAMENTE em formato JSON válido, sem nenhum texto antes ou depois do JSON. Não use markdown, não use blocos de código. Apenas o JSON puro.\n\nFormato esperado:\n{\n  \"plano\": [\n    {\"dia\": 1, \"tema\": \"Introdução\", \"atividades\": [\"Ler cap 1\", \"Exercícios\"]},\n    {\"dia\": 2, \"tema\": \"Aprofundamento\", \"atividades\": [\"Resumo\", \"Flashcards\"]}\n  ]\n}"
+                        },
+                        {
+                            "role": "user",
+                            "content": "Crie um plano de estudos com as seguintes informações:\n\nMatéria: {{ $json.body.subject }}\nPrazo: {{ $json.body.deadline }} dias\nObjetivo: {{ $json.body.goal }}\n\nGere um plano dia a dia cobrindo todos os {{ $json.body.deadline }} dias, com temas progressivos e atividades práticas para cada dia."
+                        }
+                    ]
+                },
+                "options": {
+                    "temperature": 0.7,
+                    "maxTokens": 2000
+                }
+            },
+            "id": "a1b2c3d4-0002-0002-0002-000000000002",
+            "name": "OpenAI - Gerar Plano",
+            "type": "n8n-nodes-base.openAi",
+            "typeVersion": 1.8,
+            "position": [
+                500,
+                300
+            ],
+            "credentials": {
+                "openAiApi": {
+                    "id": "SUBSTITUA_PELO_ID_DA_SUA_CREDENCIAL",
+                    "name": "OpenAI API"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// Pega o texto retornado pela OpenAI\nconst rawText = $input.first().json.message.content;\n\n// Remove possíveis blocos de markdown\nlet cleanText = rawText\n  .replace(/```json\\n?/gi, '')\n  .replace(/```\\n?/gi, '')\n  .trim();\n\n// Faz o parse do JSON\nlet parsedPlan;\ntry {\n  parsedPlan = JSON.parse(cleanText);\n} catch (e) {\n  return [{\n    json: {\n      error: 'Falha ao interpretar resposta da IA',\n      rawText: rawText\n    }\n  }];\n}\n\nreturn [{ json: parsedPlan }];\n"
+            },
+            "id": "a1b2c3d4-0003-0003-0003-000000000003",
+            "name": "JSON Parser",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                760,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "={{ JSON.stringify($json) }}",
+                "options": {
+                    "responseCode": 200
+                }
+            },
+            "id": "a1b2c3d4-0004-0004-0004-000000000004",
+            "name": "Webhook Response",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1.1,
+            "position": [
+                1020,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "OpenAI - Gerar Plano",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OpenAI - Gerar Plano": {
+            "main": [
+                [
+                    {
+                        "node": "JSON Parser",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "JSON Parser": {
+            "main": [
+                [
+                    {
+                        "node": "Webhook Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": true,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "versionId": "2",
+    "meta": {
+        "instanceId": "planejador-saas-v1"
+    },
+    "id": "workflow-planejador-saas",
+    "tags": []
+}

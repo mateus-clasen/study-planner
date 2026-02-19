@@ -1,0 +1,26 @@
+Note: Unnecessary use of -X or --request, GET is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> GET /api/study-plans HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.5.0
+> Accept: */*
+> Cookie: token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJjbWxzc3VyNnIwMDA4M3B4bW1tNDRvOTBpIiwiZW1haWwiOiJvbGRlbWFpbEB0ZXN0LmNvbSIsImV4cCI6MTc3MTU1MTk1Nn0.GrRko0AcInRju4GwBapzP__eKgj6t7wdOSSkrD1M8QA
+> 
+< HTTP/1.1 200 OK
+< vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+< content-type: application/json
+< Date: Thu, 19 Feb 2026 01:57:21 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+{ [2 bytes data]
+100     2    0     2    0     0    215      0 --:--:-- --:--:-- --:--:--   222
+* Connection #0 to host localhost left intact
+[]
