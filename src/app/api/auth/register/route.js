@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { SignJWT } from 'jose';
+import { cookies } from 'next/headers';
 
 export async function POST(req) {
     try {
@@ -51,17 +52,18 @@ export async function POST(req) {
             .setExpirationTime('24h')
             .sign(secret);
 
-        const response = NextResponse.json({ message: 'Conta criada com sucesso', userId: user.id }, { status: 201 });
-
-        response.cookies.set('token', token, {
+        // Garantia absoluta de injeção de Cookie no Next.js App Router
+        cookies().set({
+            name: 'token',
+            value: token,
             httpOnly: true,
-            secure: process.env.REQUIRE_HTTPS === 'true',
+            secure: false, // Forçadamente falso para mitigar proxies HTTPS/HTTP no NGINX local
             sameSite: 'lax',
             maxAge: 60 * 60 * 24, // 1 day
             path: '/',
         });
 
-        return response;
+        return NextResponse.json({ message: 'Conta criada com sucesso', userId: user.id }, { status: 201 });
     } catch (error) {
         console.error('Registration error:', error);
         return NextResponse.json({ error: 'Ocorreu um erro ao processar seu cadastro' }, { status: 500 });
