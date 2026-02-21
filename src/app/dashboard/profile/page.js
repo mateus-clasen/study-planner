@@ -78,6 +78,11 @@ export default function ProfilePage() {
                 body: JSON.stringify(body)
             });
 
+            if (res.status === 401) {
+                router.push('/login');
+                return;
+            }
+
             const data = await res.json();
 
             if (res.ok) {

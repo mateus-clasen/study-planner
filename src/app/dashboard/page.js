@@ -19,6 +19,10 @@ export default function DashboardPage() {
     const fetchPlans = async () => {
         try {
             const res = await fetch('/api/study-plans');
+            if (res.status === 401) {
+                window.location.href = '/login';
+                return;
+            }
             if (res.ok) {
                 const data = await res.json();
                 setPlans(data);
@@ -37,6 +41,10 @@ export default function DashboardPage() {
         setDeletingId(id);
         try {
             const res = await fetch(`/api/study-plans/${id}`, { method: 'DELETE' });
+            if (res.status === 401) {
+                window.location.href = '/login';
+                return;
+            }
             if (res.ok) {
                 setPlans(plans.filter(plan => plan.id !== id));
                 showToast('Plano excluído com sucesso!');

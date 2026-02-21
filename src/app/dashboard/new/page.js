@@ -44,6 +44,11 @@ export default function NewPlanPage() {
                 body: JSON.stringify({ subject, goal, deadlineDays })
             });
 
+            if (res.status === 401) {
+                router.push('/login');
+                return;
+            }
+
             const data = await res.json();
 
             if (res.ok) {

@@ -6,9 +6,13 @@ export async function middleware(request) {
 
     const isAuthPage = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/register');
     const isPublicPage = request.nextUrl.pathname === '/';
+    const isApiRoute = request.nextUrl.pathname.startsWith('/api/');
 
     if (!token) {
         if (!isAuthPage && !isPublicPage) {
+            if (isApiRoute) {
+                return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+            }
             return NextResponse.redirect(new URL('/login', request.url));
         }
     } else {
@@ -17,6 +21,11 @@ export async function middleware(request) {
             if (!jwtSecret) {
                 console.error('CRITICAL: JWT_SECRET not configured');
                 // Se o segredo sumir, por segurança deslogamos todos
+                if (isApiRoute) {
+                    const response = NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+                    response.cookies.delete('token');
+                    return response;
+                }
                 const response = NextResponse.redirect(new URL('/login', request.url));
                 response.cookies.delete('token');
                 return response;
@@ -41,6 +50,11 @@ export async function middleware(request) {
         } catch (err) {
             // Token inválido ou expirado
             if (!isAuthPage && !isPublicPage) {
+                if (isApiRoute) {
+                    const response = NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+                    response.cookies.delete('token');
+                    return response;
+                }
                 const response = NextResponse.redirect(new URL('/login', request.url));
                 response.cookies.delete('token');
                 return response;
