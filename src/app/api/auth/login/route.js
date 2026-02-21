@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { SignJWT } from 'jose';
-import { cookies } from 'next/headers';
 
 export async function POST(req) {
     try {
@@ -35,18 +34,17 @@ export async function POST(req) {
             .setExpirationTime('24h')
             .sign(secret);
 
-        // Garantia absoluta de injeção de Cookie no Next.js App Router
-        cookies().set({
-            name: 'token',
-            value: token,
+        const response = NextResponse.json({ message: 'Login realizado com sucesso' });
+
+        response.cookies.set('token', token, {
             httpOnly: true,
-            secure: false, // Forçadamente falso para mitigar proxies HTTPS/HTTP no NGINX local
+            secure: false, // Forçadamente falso para mitigar proxies HTTPS/HTTP no NGINX em Produção
             sameSite: 'lax',
             maxAge: 60 * 60 * 24, // 1 day
             path: '/',
         });
 
-        return NextResponse.json({ message: 'Login realizado com sucesso' });
+        return response;
     } catch (error) {
         console.error('Login error:', error);
         return NextResponse.json({ error: 'Ocorreu um erro ao realizar o login' }, { status: 500 });
