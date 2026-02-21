@@ -10,6 +10,7 @@ export async function middleware(request) {
 
     if (!token) {
         if (!isAuthPage && !isPublicPage) {
+            console.warn('[MIDDLEWARE] Acesso negado: URL', request.url, '- Token inexistente nos cookies da requisição.');
             if (isApiRoute) {
                 return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
             }
@@ -19,7 +20,7 @@ export async function middleware(request) {
         try {
             const jwtSecret = process.env.JWT_SECRET;
             if (!jwtSecret) {
-                console.error('CRITICAL: JWT_SECRET not configured');
+                console.error('[MIDDLEWARE CRITICAL] JWT_SECRET não configurado e lido no contexto (Edge Runtime). Token JWT não pode ser verificado!');
                 // Se o segredo sumir, por segurança deslogamos todos
                 if (isApiRoute) {
                     const response = NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -49,6 +50,8 @@ export async function middleware(request) {
             });
         } catch (err) {
             // Token inválido ou expirado
+            console.error('[MIDDLEWARE ERROR] jwtVerify falhou ao tentar ler token válido:', err.message);
+
             if (!isAuthPage && !isPublicPage) {
                 if (isApiRoute) {
                     const response = NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
