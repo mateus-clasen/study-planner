@@ -23,7 +23,17 @@ export default function LoginPage() {
                 body: JSON.stringify(formData),
             });
 
-            const data = await res.json();
+            const contentType = res.headers.get('content-type');
+            let data;
+
+            if (contentType && contentType.includes('application/json')) {
+                data = await res.json();
+            } else {
+                await res.text();
+                throw new Error(
+                    res.ok ? 'Resposta inesperada do servidor' : `Erro ${res.status}: Servidor temporariamente indisponível.`
+                );
+            }
 
             if (!res.ok) {
                 throw new Error(data.error || 'Credenciais inválidas. Verifique seu e-mail e senha.');

@@ -128,3 +128,4 @@ sudo firewall-cmd --reload
 ### 💡 Dicas Importantes:
 - **N8N**: Lembre-se que o workflow no N8N deve estar com o botão **"Active"** ligado para receber as requisições de produção.
 - **SSL**: Para HTTPS, recomendo usar o `certbot`: `sudo dnf install certbot python3-certbot-nginx -y && sudo certbot --nginx`.
+- **.env e Segurança**: O Next.js "embute" a chave `JWT_SECRET` dentro do sistema no momento em que você roda o `npm run build`. Se você alterar a senha/segredo no arquivo `.env` no futuro, **obrigatoriamente** rode o `npm run build` e reinicie o PM2 novamente para a alteração valer.

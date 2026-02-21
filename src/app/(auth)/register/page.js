@@ -44,7 +44,18 @@ export default function RegisterPage() {
                 }),
             });
 
-            const data = await res.json();
+            const contentType = res.headers.get('content-type');
+            let data;
+
+            if (contentType && contentType.includes('application/json')) {
+                data = await res.json();
+            } else {
+                // Se não for JSON (ex: NGINX retornou HTML de Erro 502/500)
+                await res.text(); // lê e descarta para liberar o cursor da resposta
+                throw new Error(
+                    res.ok ? 'Resposta inesperada do servidor' : `Erro ${res.status}: Servidor temporariamente indisponível. Verifique as variáveis de ambiente ou o banco de dados no servidor.`
+                );
+            }
 
             if (!res.ok) {
                 throw new Error(data.error || 'Não foi possível realizar o cadastro agora.');
