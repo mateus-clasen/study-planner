@@ -108,6 +108,14 @@ pm2 startup
 
 ## 8. Configuração do Proxy Reverso (Nginx)
 
+> [!WARNING] 
+> **Você usa um Painel de Servidor (como aaPanel, cPanel, CyberPanel)?**
+> Se sim, **Pule esta seção inteira e a Seção 10 (SSL)**!
+> Ferramentas como o aaPanel gerenciam os arquivos do Nginx e seus Certificados SSL nativamente nas próprias pastas do sistema interno. Alterar via terminal usando o passo-a-passo abaixo causará **Erro 502 Bad Gateway e colisão do Certbot** na sua URL.
+> Nestes casos, vá no site do seu aaPanel -> `Website` -> Selecione o Domínio -> Abra as configurações -> Selecione `Reverse Proxy` -> e roteie a `Target URL` para `http://127.0.0.1:3000`. Depois, na aba SSL do próprio painel, ative o botão do "Let's Encrypt".
+
+**Abaixo estão as instruções estritas apenas para Servidores Vazios e "Crus" sem interface gráfica web:**
+
 Precisamos do Nginx para expor o servidor na porta 80 (HTTP padrão) redirecionando para nossa porta de aplicação interna 3000.
 
 Crie um arquivo para o site:
