@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { SignJWT } from 'jose';
@@ -53,9 +54,10 @@ export async function POST(req) {
 
         const response = NextResponse.json({ message: 'Conta criada com sucesso', userId: user.id }, { status: 201 });
 
-        response.cookies.set('token', token, {
+        const cookieStore = await cookies();
+        cookieStore.set('token', token, {
             httpOnly: true,
-            secure: false, // Forçadamente falso para mitigar proxies HTTPS/HTTP no NGINX em Produção
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
             maxAge: 60 * 60 * 24, // 1 day
             path: '/',
