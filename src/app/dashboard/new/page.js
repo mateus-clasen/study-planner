@@ -41,6 +41,7 @@ export default function NewPlanPage() {
             const res = await fetch('/api/study-plans/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify({ subject, goal, deadlineDays })
             });
 

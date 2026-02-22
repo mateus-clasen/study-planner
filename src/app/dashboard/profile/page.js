@@ -28,7 +28,9 @@ export default function ProfilePage() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch('/api/auth/profile');
+                const res = await fetch('/api/auth/profile', {
+                    credentials: 'include'
+                });
                 if (res.ok) {
                     const data = await res.json();
                     setOriginalUser(data);
@@ -75,6 +77,7 @@ export default function ProfilePage() {
             const res = await fetch('/api/auth/profile', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify(body)
             });
 

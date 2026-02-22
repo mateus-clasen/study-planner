@@ -18,7 +18,9 @@ export default function DashboardPage() {
 
     const fetchPlans = async () => {
         try {
-            const res = await fetch('/api/study-plans');
+            const res = await fetch('/api/study-plans', {
+                credentials: 'include'
+            });
             if (res.status === 401) {
                 window.location.href = '/login';
                 return;
@@ -40,7 +42,10 @@ export default function DashboardPage() {
         if (!confirm('Deseja realmente excluir este planejamento? Essa ação não pode ser desfeita.')) return;
         setDeletingId(id);
         try {
-            const res = await fetch(`/api/study-plans/${id}`, { method: 'DELETE' });
+            const res = await fetch(`/api/study-plans/${id}`, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
             if (res.status === 401) {
                 window.location.href = '/login';
                 return;
