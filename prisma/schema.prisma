@@ -23,6 +23,6 @@ model StudyPlan {
   subject   String
   goal      String
   deadline  String
-  content   String
+  content   String   @db.LongText
   createdAt DateTime @default(now())
 }
