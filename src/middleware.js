@@ -4,6 +4,10 @@ import { jwtVerify } from 'jose';
 export async function middleware(request) {
     const token = request.cookies.get('token')?.value;
 
+    const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+    const protocol = request.headers.get('x-forwarded-proto') || 'http';
+    const baseUrl = `${protocol}://${host}`;
+
     const isAuthPage = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/register');
     const isPublicPage = request.nextUrl.pathname === '/';
     const isApiRoute = request.nextUrl.pathname.startsWith('/api/');
@@ -14,7 +18,7 @@ export async function middleware(request) {
             if (isApiRoute) {
                 return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
             }
-            return NextResponse.redirect(new URL('/login', request.url));
+            return NextResponse.redirect(new URL('/login', baseUrl));
         }
     } else {
         try {
@@ -27,7 +31,7 @@ export async function middleware(request) {
                     response.cookies.delete('token');
                     return response;
                 }
-                const response = NextResponse.redirect(new URL('/login', request.url));
+                const response = NextResponse.redirect(new URL('/login', baseUrl));
                 response.cookies.delete('token');
                 return response;
             }
@@ -40,7 +44,7 @@ export async function middleware(request) {
             requestHeaders.set('x-user-id', payload.userId);
 
             if (isAuthPage) {
-                return NextResponse.redirect(new URL('/dashboard', request.url));
+                return NextResponse.redirect(new URL('/dashboard', baseUrl));
             }
 
             return NextResponse.next({
@@ -58,7 +62,7 @@ export async function middleware(request) {
                     response.cookies.delete('token');
                     return response;
                 }
-                const response = NextResponse.redirect(new URL('/login', request.url));
+                const response = NextResponse.redirect(new URL('/login', baseUrl));
                 response.cookies.delete('token');
                 return response;
             }
