@@ -71,7 +71,7 @@ nano .env
 Cole este template e altere os valores necessários:
 
 ```env
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="mysql://usuario:senha_forte@127.0.0.1:3306/nome_do_banco"
 N8N_WEBHOOK_URL="https://seu-n8n.dominio.com/webhook/gerar-plano"
 JWT_SECRET="GERAR_UMA_CHAVE_ALEATORIA_MUITO_SEGURA_E_LONGA"
 NODE_ENV="production"
